@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
+  m_Name: Packed Assets Lua
+  m_EditorClassIdentifier: 
+  m_GroupName: Packed Assets Lua
+  m_Data:
+    m_SerializedData: []
+  m_GUID: 2431a29ac18847044bd2cb66e2d873f5
+  m_SerializeEntries:
+  - m_GUID: c9b215a3bf44bc14f9164b44855c1a8c
+    m_Address: Assets/res/scripts
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  m_ReadOnly: 0
+  m_Settings: {fileID: 11400000, guid: 1e1f3d06e398b1f4c8d6b50f68139a33, type: 2}
+  m_SchemaSet:
+    m_Schemas:
+    - {fileID: 11400000, guid: 678fb227a48c399408fc83edc045c01d, type: 2}
+    - {fileID: 11400000, guid: 39e97ce9893e1724cae9a86e1b633874, type: 2}
