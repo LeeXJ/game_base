@@ -31,13 +31,7 @@ public class LuaState : MonoBehaviour
         meta.Dispose();
 
         scriptEnv.Set("self", this);
-        // foreach (var injection in injections)
-        // {
-        //     scriptEnv.Set(injection.name, injection.value);
-        // }
-
-        // luaEnv.DoString(AddressablesUtility.GetBytesFromAssetReference(_addressableTextAsset), "LuaTestScript", scriptEnv);
-        luaEnv.DoString(AddressablesUtility.GetBytesFromAssetPath("Assets/res/scripts/hello.lua"), "LuaTestScript", scriptEnv);
+        luaEnv.DoString(AddressablesUtility.GetBytesFromAssetPath("Assets/res/scripts/main.lua"), "LuaState", scriptEnv);
 
         Action luaAwake = scriptEnv.Get<Action>("awake");
         scriptEnv.Get("start", out luaStart);
