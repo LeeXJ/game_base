@@ -37,9 +37,9 @@ public static class AddressablesUtility
     public static byte[] GetBytesFromAssetPath(string path)
     {
         var handle = Addressables.LoadAssetAsync<TextAsset>(path);
-        var result = handle.WaitForCompletion();
+        var result = handle.WaitForCompletion().bytes;
         Addressables.Release(handle);
-        return result.bytes;
+        return result;
     }
 }
 
