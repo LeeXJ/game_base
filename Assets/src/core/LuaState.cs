@@ -2,13 +2,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AddressableAssets;
 using XLua;
 
 public class LuaState : MonoBehaviour
 {
-    public LuaAsset luaScript;
-    // public Injection[] injections;
-
     internal static LuaEnv luaEnv = new LuaEnv(); //all lua behaviour shared one luaenv only!
     internal static float lastGCTime = 0;
     internal const float GCInterval = 1;//1 second 
@@ -22,7 +20,10 @@ public class LuaState : MonoBehaviour
     void Awake()
     {
         scriptEnv = luaEnv.NewTable();
-
+        luaEnv.AddLoader((ref string filepath) =>
+        {
+            return AddressablesUtility.GetBytesFromAssetPath($"Assets/res/scripts/{filepath}.lua");
+        });
         // 为每个脚本设置一个独立的环境，可一定程度上防止脚本间全局变量、函数冲突
         LuaTable meta = luaEnv.NewTable();
         meta.Set("__index", luaEnv.Global);
@@ -35,7 +36,8 @@ public class LuaState : MonoBehaviour
         //     scriptEnv.Set(injection.name, injection.value);
         // }
 
-        luaEnv.DoString(luaScript.GetDecodeBytes(), "LuaTestScript", scriptEnv);
+        // luaEnv.DoString(AddressablesUtility.GetBytesFromAssetReference(_addressableTextAsset), "LuaTestScript", scriptEnv);
+        luaEnv.DoString(AddressablesUtility.GetBytesFromAssetPath("Assets/res/scripts/hello.lua"), "LuaTestScript", scriptEnv);
 
         Action luaAwake = scriptEnv.Get<Action>("awake");
         scriptEnv.Get("start", out luaStart);
