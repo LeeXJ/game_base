@@ -44,13 +44,14 @@ public static class AddressablesUtility
         return result;
     }
 
+    // 生产预制体，返回addressable句柄
     public static AsyncOperations.AsyncOperationHandle<GameObject> Instantiate(string path, Transform parent)
     {
         var handle = Addressables.InstantiateAsync(path, parent);
         var result = handle.WaitForCompletion().gameObject;
         return handle;
     }
-
+    // 释放addressable句柄
     public static void Release(AsyncOperations.AsyncOperationHandle<GameObject> handle)
     {
         Addressables.Release(handle);
