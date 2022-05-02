@@ -1,6 +1,7 @@
 ﻿using System;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
+using AsyncOperations = UnityEngine.ResourceManagement.AsyncOperations;
 
 /// <summary>
 /// A utility class for various Addressables functionality
@@ -27,19 +28,32 @@ public static class AddressablesUtility
         return string.Empty;
     }
 
-    public static byte[] GetBytesFromAssetReference(AssetReference reference)
-    {
-        var handle = reference.LoadAssetAsync<TextAsset>();
-        var result = handle.WaitForCompletion();
-        return result.bytes;
-    }
-   
     public static byte[] GetBytesFromAssetPath(string path)
     {
         var handle = Addressables.LoadAssetAsync<TextAsset>(path);
         var result = handle.WaitForCompletion().bytes;
         Addressables.Release(handle);
         return result;
+    }
+
+    public static GameObject GetGameObjectFromAssetPath(string path)
+    {
+        var handle = Addressables.LoadAssetAsync<GameObject>(path);
+        var result = handle.WaitForCompletion().gameObject;
+        Addressables.Release(handle);
+        return result;
+    }
+
+    public static AsyncOperations.AsyncOperationHandle<GameObject> Instantiate(string path, Transform parent)
+    {
+        var handle = Addressables.InstantiateAsync(path, parent);
+        var result = handle.WaitForCompletion().gameObject;
+        return handle;
+    }
+
+    public static void Release(AsyncOperations.AsyncOperationHandle<GameObject> handle)
+    {
+        Addressables.Release(handle);
     }
 }
 
