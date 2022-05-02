@@ -31,7 +31,7 @@ public class LuaState : MonoBehaviour
         meta.Dispose();
 
         scriptEnv.Set("self", this);
-        luaEnv.DoString(AddressablesUtility.GetBytesFromAssetPath("Assets/res/scripts/main.lua"), "LuaState", scriptEnv);
+        luaEnv.DoString("require 'main'", "LuaState", scriptEnv);
 
         Action luaAwake = scriptEnv.Get<Action>("awake");
         scriptEnv.Get("start", out luaStart);
